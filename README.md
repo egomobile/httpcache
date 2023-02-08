@@ -8,7 +8,7 @@ An easy to use httpcache module that can cache a key value pair.
 package main
 
 import (
-    "e-go-mobile.com/httpcache"
+    "github.com/egomobile/httpcache"
 )
 
 func main() {
