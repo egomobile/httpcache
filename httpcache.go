@@ -26,7 +26,6 @@ func getDataset(key string) Dataset {
 		} else {
 			d.Key = ""
 			d.Value = ""
-			fmt.Println("Key doesn't exist")
 		}
 	}
 
@@ -44,8 +43,7 @@ func getDatasets(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		}
 	} else {
 		var dataSets []Dataset
-		for key, value := range DATASETS {
-			print(key)
+		for _, value := range DATASETS {
 			d := getDataset(value.Key)
 			dataSets = append(dataSets, d)
 		}
