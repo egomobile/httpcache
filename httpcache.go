@@ -80,7 +80,7 @@ func sendResponse(w http.ResponseWriter, status int, data []byte) {
 	w.Write(data)
 }
 
-func Server(port string) {
+func Server(port string, name string) {
 	var d1 Dataset
 	d1.Key = "foo"
 	d1.Value = "bar"
@@ -95,5 +95,6 @@ func Server(port string) {
 	router.GET("/datasets", getDatasets)
 	router.PUT("/datasets", putDataset)
 
+	fmt.Println("Server", name, "listening on port", port, "...")
 	log.Fatal(http.ListenAndServe(":" + port, router))
 }
