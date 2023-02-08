@@ -1,4 +1,4 @@
-module e-go-mobile.com/httpcache
+module github.com/egomobile/httpcache
 
 go 1.19
 
