@@ -1,5 +1,9 @@
 # Change Log (ego-cli)
 
+## 0.3.0
+
+* add license header, remove example data, send error response
+
 ## 0.2.0
 
 * add name to run server with

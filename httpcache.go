@@ -1,3 +1,18 @@
+// This file is part of the ego-cli distribution.
+// Copyright (c) Next.e.GO Mobile SE, Aachen, Germany (https://e-go-mobile.com/)
+//
+// ego-cli is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as
+// published by the Free Software Foundation, version 3.
+//
+// ego-cli is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+// Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
+
 package httpcache
 
 import (
@@ -39,7 +54,7 @@ func getDatasets(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		if d.Key != "" {
 			sendJsonResponse(w, 200, d)
 		} else {
-			sendResponse(w, 404, []byte("Key doesn't exist"))
+			sendResponse(w, 404, []byte("key doesn't exist"))
 		}
 	} else {
 		var dataSets []Dataset
@@ -62,14 +77,14 @@ func putDataset(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	DATASETS[d.Key] = d
 
-	sendResponse(w, 404, []byte("Dataset sucessfully saved!"))
+	sendResponse(w, 404, []byte("dataset sucessfully saved"))
 }
 
 func sendJsonResponse(w http.ResponseWriter, status int, dataSets interface{}) {
 	j, err := json.Marshal(dataSets)
 	if err != nil {
 		fmt.Println(err)
-		return
+		sendResponse(w, 500, []byte("an error occured while marshalling the response data"))
 	}
 	sendResponse(w, status, j)
 }
@@ -81,16 +96,6 @@ func sendResponse(w http.ResponseWriter, status int, data []byte) {
 }
 
 func Server(port string, name string) {
-	var d1 Dataset
-	d1.Key = "foo"
-	d1.Value = "bar"
-	DATASETS[d1.Key] = d1
-
-	var d2 Dataset
-	d2.Key = "foo2"
-	d2.Value = "bar2"
-	DATASETS[d2.Key] = d2
-
 	router := httprouter.New()
 	router.GET("/datasets", getDatasets)
 	router.PUT("/datasets", putDataset)
